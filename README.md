@@ -53,7 +53,7 @@ python run_experiment.py experiment=mnist/ladder
 
 The code supports multi-gpu training (make sure to set `train.ddp: True`):
 ```bash
-mpiexec -n 4 python run_experiment.py experiment=mnist/dct_ladder
+mpiexec -n 4 python run_experiment.py experiment=mnist/dvp_vae
 ```
 
 
@@ -71,4 +71,4 @@ If you found this work useful in your research, please consider citing:
 ### Acknowledgements
 This research was (partially) funded by the Hybrid Intelligence Center, a 10-year programme funded by the Dutch Ministry of Education, Culture and Science through the Netherlands Organisation for Scientific Research, https://hybrid-intelligence-centre.nl.
 
-This work was carried out on the Dutch national infrastructure with the support of SURF Cooperative.
+Some of the experiments were carried out on the Dutch national infrastructure with the support of SURF Cooperative.
