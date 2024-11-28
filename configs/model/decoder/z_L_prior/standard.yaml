@@ -1,0 +1,3 @@
+---
+_target_: utils.distribution.create_standard_normal_prior
+size: null

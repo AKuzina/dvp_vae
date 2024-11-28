@@ -1,0 +1,74 @@
+# @package _global_
+defaults:
+  - override /dataset: cifar10
+  - override /model: context_ladder_vae
+  - override /model/encoder: small_ladder
+  - override /model/decoder: context_ladder
+  - override /model/decoder/z_L_prior: ddgm 
+  - override /train: cifar_defaults
+
+dataset:
+  data_module:
+    batch_size: 128
+    test_batch_size: 512
+    use_augmentation: False
+model:
+  latent_scales:
+    - 10 # 32 x32
+    - 8 # 16 x 16
+    - 6 # 8 x 8
+    - 4 # 4 x 4
+  latent_width:
+    - 3
+    - 3
+    - 3
+    - 3
+  batch_norm: False
+  weight_norm: False
+  num_ch: 128 
+  scale_ch_mult: 1.
+  block_ch_mult: .75 
+  likelihood: logistic_mixture 
+  num_mix: 10
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 1000
+  activation: silu
+  start_scale_at_x: true
+  ctx_size: 7
+  ctx_type: dct
+  pretrain_prior_epochs: 0
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 4
+  decoder:
+    decoder_res_mode: 2x3
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    min_logvar: -10
+    z_L_prior:
+      model:
+        model_channels: 32
+        num_res_blocks: 3
+        dropout: 0.0
+        num_heads: 1
+        use_scale_shift_norm: true
+        channel_mult:
+          - 1
+      T: 25
+      t_sample: uniform
+      parametrization: eps
+      ll: gaussian 
+      cont_time: true
+      noise_schedule: 
+        _target_: model.ddgm.LinearNoiseSchedule
+        gamma_min: -10.0
+        gamma_max: 7.
+        train: false
+train:
+  max_epochs: 3000
+  early_stopping_epochs: 300
+  scheduler:
+    T_max: 3000
+    eta_min: 1e-4

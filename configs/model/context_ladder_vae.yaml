@@ -1,0 +1,30 @@
+---
+defaults:
+  - encoder: ladder
+  - decoder: context_ladder
+
+_target_: model.context_ladder_vae.CTX_LADDER_VAE
+name: context_ladder
+prior: standard
+likelihood: bernoulli
+num_mix: 1
+beta_start: 1
+beta_end: 1
+warmup: 0
+is_k: 500
+ctx_size: 7 # last latent variable (DCT + filetring) will have this size
+latent_scales:
+  - 0 # 0 latents with dim x//2
+  - 2 # 2 latent with dim x//4
+latent_width:
+  - 0 # 0 channels for the latents of group 1
+  - 1 # 1 channel for the latent of group 2
+activation: silu  # silu, relu, gelu, elu
+batch_norm: True
+weight_norm: True
+padding_mode: zeros
+num_ch: 64
+scale_ch_mult: 2
+block_ch_mult: 0.25
+start_scale_at_x: False
+pretrain_prior_epochs: 0

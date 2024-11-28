@@ -1,0 +1,14 @@
+---
+data_module:
+  _target_: datasets.omniglot.OMNIGLOT
+  batch_size: 64
+  test_batch_size: 1024
+  model: ${model.name}
+  ctx_size: null
+image_size:
+  - 1
+  - 28
+  - 28
+n_classes:
+  - 50
+name: omniglot

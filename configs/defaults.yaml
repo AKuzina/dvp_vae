@@ -1,0 +1,9 @@
+# @package _global_
+
+defaults:
+  - _self_
+  - dataset: mnist
+  - model: ladder
+  - train: defaults
+  - wandb: defaults
+  - experiment: null

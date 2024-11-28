@@ -1,0 +1,5 @@
+---
+_target_: torch.optim.lr_scheduler.CosineAnnealingWarmRestarts
+eta_min: 0.
+T_0: 1000  # number of epoch before first restart
+T_mult: 1  #A factor increases after a restart

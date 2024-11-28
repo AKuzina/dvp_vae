@@ -1,0 +1,69 @@
+# @package _global_
+defaults:
+  - override /dataset: omniglot
+  - override /model: context_ladder_vae
+  - override /model/encoder: small_ladder
+  - override /model/decoder: context_ladder
+  - override /model/decoder/z_L_prior: ddgm
+  - override /train: mnist_defaults
+  
+dataset:
+  data_module:
+    batch_size: 250
+    test_batch_size: 1000
+model:
+  latent_scales:
+    - 4
+    - 4 
+  latent_width:
+    - 1
+    - 1
+  batch_norm: False
+  weight_norm: False
+  likelihood: bernoulli
+  num_ch: 80 
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 1000 
+  activation: silu
+  scale_ch_mult: 1.
+  block_ch_mult: 0.5
+  start_scale_at_x: false
+  ctx_size: 5
+  ctx_type: dct
+  pretrain_prior_epochs: 0
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 3
+  decoder:
+    decoder_res_mode: 2x3
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    min_logvar: -10
+    z_L_prior:
+      model:
+        model_channels: 32
+        num_res_blocks: 3
+        dropout: 0.05
+        num_heads: 1
+        use_scale_shift_norm: true
+        channel_mult:
+          - 1
+      T: 50
+      t_sample: uniform
+      parametrization: eps
+      ll: gaussian #gaussian discretized_gaussian
+      cont_time: true
+      noise_schedule: 
+        _target_: model.ddgm.LinearNoiseSchedule
+        gamma_min: -6.0
+        gamma_max: 7.
+        train: false
+train:
+  max_epochs: 500 
+  early_stopping_epochs: 200
+  grad_clip: 2.0
+  scheduler:
+    T_max: 500 
+    eta_min: 1e-4

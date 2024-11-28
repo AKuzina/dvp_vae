@@ -1,0 +1,3 @@
+---
+_target_: utils.distribution.create_gaussian_prior
+size: null

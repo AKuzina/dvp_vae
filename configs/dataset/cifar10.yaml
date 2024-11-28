@@ -1,0 +1,15 @@
+---
+data_module:
+  _target_: datasets.cifar10.CIFAR10
+  batch_size: 64
+  test_batch_size: 1024
+  model: ${model.name}
+  ctx_size: null
+  use_augmentation: false
+image_size:
+  - 3
+  - 32
+  - 32
+n_classes:
+  - 10
+name: cifar10

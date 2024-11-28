@@ -1,0 +1,16 @@
+---
+_target_: model.encoder.SmallLadderEncoder
+num_init_blocks: 1  # number of resnet blocks before the first latent variable
+num_blocks_per_scale: 1 # number of resnet block between before each latent variable
+num_ch: ${model.num_ch}
+scale_ch_mult: ${model.scale_ch_mult}
+block_ch_mult: ${model.block_ch_mult}
+data_ch: ${dataset.image_size[0]}
+data_dim: ${dataset.image_size[1]}
+latent_scales: ${model.latent_scales}
+latent_width: ${model.latent_width}
+weight_norm: ${model.weight_norm}
+batch_norm: ${model.batch_norm}
+activation: ${model.activation}
+start_scale_at_x: ${model.start_scale_at_x}
+dset: ${dataset.name}

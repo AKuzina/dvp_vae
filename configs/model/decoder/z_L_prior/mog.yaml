@@ -1,0 +1,4 @@
+---
+_target_: utils.distribution.create_MoG_prior
+size: null
+num_components: 10

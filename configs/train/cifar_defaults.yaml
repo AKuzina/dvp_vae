@@ -1,0 +1,33 @@
+---
+defaults:
+  - optimizer: adamax
+  - scheduler: cosine
+
+seed: 123
+start_epoch: 0
+image_size: ${dataset.image_size}
+resume_id: null
+pretrain_id: null
+ema_rate: 0.999
+acc_grad: 1
+grad_clip: 150.0
+grad_skip_thr: 0
+max_epochs: 1000
+max_iter_per_epoch: null
+early_stopping_epochs: 100
+device: 'cuda:0' 
+eval_freq: 25
+ddp: false
+use_amp: false
+compute_fid: true
+fid_on_train: true
+temp_fid: 1.0
+lr_warup_epochs: 5
+only_test: False # only run a test loop
+optimizer:
+  lr: 3e-3
+  weight_decay: 1e-6
+scheduler:
+  T_max: 1000
+  eta_min: 1e-4
+

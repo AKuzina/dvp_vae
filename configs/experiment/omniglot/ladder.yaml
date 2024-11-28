@@ -1,0 +1,47 @@
+# @package _global_
+defaults:
+  - override /dataset: omniglot
+  - override /model: ladder_vae
+  - override /model/encoder: small_ladder
+  - override /model/decoder: ladder
+  - override /model/decoder/z_L_prior: gaussian
+  - override /train: mnist_defaults
+
+dataset:
+  data_module:
+    batch_size: 250
+    test_batch_size: 1000
+    ctx_size: null
+model:
+  latent_scales:
+    - 4
+    - 4
+  latent_width:
+    - 1
+    - 1
+  batch_norm: False
+  weight_norm: False
+  likelihood: bernoulli
+  num_ch: 80 
+  beta_start: 1
+  beta_end: 1
+  warmup: 0
+  is_k: 1000
+  activation: silu
+  scale_ch_mult: 1.
+  block_ch_mult: .5
+  start_scale_at_x: false
+  encoder:
+    num_init_blocks: 0
+    num_blocks_per_scale: 3
+  decoder:
+    decoder_res_mode: 2x3
+    num_blocks_per_scale: 1
+    num_postprocess_blocks: 0
+    min_logvar: -10
+train:
+  max_epochs: 500 
+  grad_clip: 2.0
+  scheduler:
+    T_max: 500 
+    eta_min: 1e-4

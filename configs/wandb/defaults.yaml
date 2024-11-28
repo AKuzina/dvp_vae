@@ -1,0 +1,10 @@
+---
+setup:
+  project: dvp_vae
+  entity: null
+  mode: online
+watch:
+  log: gradients
+  log_freq: 1000
+group: null
+run_name: null

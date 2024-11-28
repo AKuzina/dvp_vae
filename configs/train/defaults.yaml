@@ -1,0 +1,29 @@
+---
+defaults:
+  - optimizer: adam
+  - scheduler: null
+
+seed: 0
+grad_clip: 0
+grad_skip_thr: 0  # skip the update step is maximal grad norm is larger then this value (ignore if 0)
+start_epoch: 0
+resume_id: null  # continue training from a given checkpoint (also the same wandb run)
+pretrain_id: null  # start a new run, but from the pre-trained weights of the given run
+device: cuda
+max_epochs: 100
+early_stopping_epochs: 100
+image_size: ${dataset.image_size}
+acc_grad: 1  # accumulate gradient for a given number of iterations
+ema_rate: 0  # if > 0 keep track of exponential moving average of the model weights and use it during evaluation
+eval_freq: 1  # how often to run evaluation on validation dataset (in epochs). Only used to speed up training and test hypothesis.
+ddp: False
+compute_fid: True
+fid_on_train: False
+temp_fid: 1.0  # temperature for the fid computation
+lr_factor: 0.5 # not used
+lr_patience: 10 # not used
+lr_min: 1e-5 # not used
+use_amp: False # use automatic mixed precision
+lr_warup_epochs: 0 # number of epochs to linearly increase the learning rate from 0 to the initial value
+only_test: False # only run a test loop
+max_iter_per_epoch: null

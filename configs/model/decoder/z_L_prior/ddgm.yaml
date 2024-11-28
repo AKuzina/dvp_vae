@@ -1,0 +1,26 @@
+---
+_target_: model.ddgm.DiffusionPrior
+model:
+  _target_: utils.thirdparty.unet.UNetModel
+  image_size: null
+  in_channels: null
+  out_channels: null
+  model_channels: 64
+  num_res_blocks: 5
+  dropout: 0.1
+  num_heads: 4
+  channel_mult:
+    - 1
+    - 0.25
+  use_scale_shift_norm: True
+  attention_resolutions: tuple([])
+T: 100
+t_sample: uniform
+parametrization: eps
+ll: discretized_gaussian
+cont_time: true
+noise_schedule: 
+  _target_: model.ddgm.LinearNoiseSchedule
+  gamma_min: -13
+  gamma_max: 5.
+

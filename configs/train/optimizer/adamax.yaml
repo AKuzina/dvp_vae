@@ -1,0 +1,5 @@
+---
+_target_: torch.optim.Adamax
+lr: 0.1
+eps: 1e-08
+weight_decay: 0.
